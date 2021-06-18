@@ -52,6 +52,10 @@
       list-style: none;
     }
 
+    .checked{
+      color:gray;
+      text-decoration:line-through;
+    }
 
     a {
       color: #428bca;
@@ -87,9 +91,9 @@
     }
 
     input {
-      height: 45px;
+      /* height: 45px; */
       padding: 10px 16px;
-      font-size: 18px;
+      font-size: 40px;
       line-height: 1.3;
       border-radius: 6px;
     }
@@ -121,6 +125,11 @@
     .text-muted {
       color: #999;
     }  
+
+    .taskCheckbox{
+      transform: scale(1.5);
+      margin-right: 20px;
+    }
   </style>
 </head>
 <body>
@@ -129,11 +138,11 @@
   <div class="container">
     
     <div class="page-header"> 
-      <h1>jQuery To-Do Application</h1>
+      <h1>My Task List</h1>
     </div>
 
     <form id="data-newTaskForm" >
-      <input class="form-control" type="text" placeholder="Add an item..." id="data-newTaskInput">
+      <input class="form-control" type="text" placeholder="Add a Task..." id="data-newTaskInput">
     </form>
 
     <ul id="data-taskList">
@@ -148,101 +157,21 @@
 <script>
 // INSERT CODE HERE
 
-const tasksContainer = document.querySelector('[data-taskList]')
-const newTaskForm = document.querySelector('[data-newTaskForm]')
-const newTaskInput = document.querySelector('[data-newTaskInput]')
-let tasks =['Wake up', 'Shower']
-
 $(document).ready(function() {
   $("form").submit(function(e){
     e.preventDefault();
 
+    if($("#data-newTaskInput").val()){    
+      $('#data-taskList').append('<li><input type="checkbox" class="taskCheckbox">' + $("#data-newTaskInput").val());
+      $("form").trigger("reset");
+    }else {alert("Task iatem cannot be empty.");}
+  });
 
-    $('#data-taskList').append(
-      $(document.createElement('input')).prop({
-        id:  'taskCheckbox',
-        value:  'car',
-        type: 'checkbox'
-      })
-      ).append(
-      $(document.createElement('label')).prop({
-        for: 'myCheckBox'
-      }).append($("#data-newTaskInput").val())
-      ).append(document.createElement('br'));
-  })
+  $('ul').on('click','.taskCheckbox', function(){
+      $(this).parent('li').toggleClass('checked');
+  });
 
-
-  let li = $("<li><input type='checkbox'<label>" + "test" + "</label></li>");
-  $("#data-taskList").append(li)
-  $(this).val("");
-
-
-
-
-    // $('form').submit(function(event) {
-    //   event.preventDefault();
-    //   $('#data-newTaskForm').append(
-    //     $(document.createElement('input')).prop({
-    //         id: 'myCheckBox',
-    //         name: 'interest',
-    //         value: 'car',
-    //         type: 'checkbox'
-    //     })
-    //   ).append(
-    //     $(document.createElement('label')).prop({
-    //         for: 'myCheckBox'
-    //     }).html('Car')
-    //     ).append(document.createElement('br'));
-    // })
 });
-
-
-
-// const tasksContainer = document.querySelector('[data-taskList]')
-// const newTaskForm = document.querySelector('[data-newTaskForm]')
-// const newTaskInput = document.querySelector('[data-newTaskInput]')
-// let tasks =['Wake up', 'Shower']
-
-// newTaskForm.addEventListener('submit', event=>{
-//   event.preventDefault()
-//   const taskName = newTaskInput.value
-//   const task=createTask(taskName)
-//   newTaskInput.value = null
-//   tasks.push (task)
-//   render()
-
-// })
-
-// function createTask(name){
-//   return name
-// }
-
-// function render(){
-// clearElement(tasksContainer)
-// tasks.forEach(tasks=>{
-//   const taskElement = document.createElement('li')
-//   taskElement.classList.add("taskName")
-//   taskElement.innerText = tasks
-//   tasksContainer.appendChild(taskElement)
-
-//   const taskElementCheckBox = document.createElement('input')
-//   taskElementCheckBox.type = "checkbox";
-//   tasksContainer.appendChild(taskElementCheckbox)
-// })
-// }
-
-// function clearElement(element){
-// while (element.firstChild){
-//   element.removeChild(element.firstChild)
-// }
-// }
-
-// render()
-//document ready
-//prevent default
-//event binding
-
-
 </script>
 </body>
 </html>
