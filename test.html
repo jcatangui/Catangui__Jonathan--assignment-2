@@ -49,9 +49,7 @@
 
     ul li {
       cursor: move;
-      list-style: none;
     }
-
 
     a {
       color: #428bca;
@@ -132,11 +130,11 @@
       <h1>jQuery To-Do Application</h1>
     </div>
 
-    <form id="data-newTaskForm" >
-      <input class="form-control" type="text" placeholder="Add an item..." id="data-newTaskInput">
+    <form data-newTaskForm >
+      <input class="form-control" type="text" placeholder="Add an item..." data-newTaskInput>
     </form>
 
-    <ul id="data-taskList">
+    <ul data-taskList>
       <!-- To do items get added dynamically here -->
       
 
@@ -157,27 +155,19 @@ $(document).ready(function() {
   $("form").submit(function(e){
     e.preventDefault();
 
-
-    $('#data-taskList').append(
+    $('#data-newTaskForm').append(
       $(document.createElement('input')).prop({
-        id:  'taskCheckbox',
-        value:  'car',
+        id: 'myCheckBox',
+        name: 'interest',
+        value: 'cars',
         type: 'checkbox'
       })
       ).append(
-      $(document.createElement('label')).prop({
-        for: 'myCheckBox'
-      }).append($("#data-newTaskInput").val())
+        $(document.createElement('li')).prop({
+          for: 'myCheckBox'
+        }).html('Car')
       ).append(document.createElement('br'));
   })
-
-
-  let li = $("<li><input type='checkbox'<label>" + "test" + "</label></li>");
-  $("#data-taskList").append(li)
-  $(this).val("");
-
-
-
 
     // $('form').submit(function(event) {
     //   event.preventDefault();
